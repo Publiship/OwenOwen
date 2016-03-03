@@ -1,0 +1,119 @@
+﻿@model OwenOwenTrust.recipientsearch
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+
+@using (Html.BeginForm("Index", "recipients", FormMethod.Get))
+{
+    <div>
+        @Html.TextBoxFor(model => model.PID, htmlAttributes: new { id = "PID" })
+    </div>
+    <div>
+        @Html.TextBoxFor( model => model.Firstnames, htmlAttributes: new { id = "Firstnames" })
+    </div>
+   <div>
+       @Html.TextBoxFor(model => model.LastName, htmlAttributes: new { id = "Lastname" })
+   </div>
+    <div>
+        @Html.TextBoxFor(model => model.Sex, htmlAttributes: new { id = "Sex" })
+    </div>
+    <div>
+        @Html.TextBoxFor(model => model.Status, htmlAttributes: new { id = "Status" })
+    </div>
+    <div>
+        @Html.TextBoxFor(model => model.Age, htmlAttributes: new { id = "Age" })
+    </div>
+    <div>
+        @Html.TextBoxFor(model => model.StoreNo, htmlAttributes: new { id = "StoreNo" })
+    </div>
+    <div>
+        <input id="searchSubmit" type="submit" value="Search" />
+    </div>
+    <div>
+        <input id="searchReset" type="submit" value="Clear" />
+    </div>
+
+}
+
+<table class="table">
+    <tr>
+        <th>
+           <!-- @Html.DisplayNameFor(model => model.PID) -->
+           @Html.ActionLink("ID No.", "Index", new {  sortOrder = ViewBag.IdSortParm }) 
+        </th>
+        <th>
+            <!-- @Html.DisplayNameFor(model => model.LastName) -->
+            @Html.ActionLink("Last name", "Index", new { sortOrder = ViewBag.NameSortParm })
+        </th>
+        <th>
+            <!-- @Html.DisplayNameFor(model => model.Firstnames) -->
+            @Html.ActionLink("Initials", "Index", new { sortOrder = ViewBag.InitialSortParm })
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Sex)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StoreNo)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.recipients) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Firstnames)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Sex)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StoreName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ID })
+        </td>
+    </tr>
+}
+
+</table>
+@section scripts {
+    <script type="text/javascript">
+    // clear search parameters and reload the grid with all records
+    $('#searchReset').click(function () {
+        alert('!!!!!');
+        $('#PID').val('');
+        $('#Firstnames').val('');
+        $('#Lastname').val('');
+        $('#Sex').val('');
+        $('#Status').val('');
+        $('#Age').val('');
+        $('#StoreNo').val('');
+    });
+    </script>
+}
